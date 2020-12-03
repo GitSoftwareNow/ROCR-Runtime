@@ -29,6 +29,27 @@ Runtime extension package:
 The contents of these packages are installed in /opt/rocm/hsa and /opt/rocm by default.
 The core runtime package depends on the hsakmt-roct-dev package
 
+To build ROCR-Runtime processor amd64 or aarch64
+
+e.g
+mkdir build
+cd build
+cmake \
+          -DCMAKE_C_FLAGS_RELEASE:STRING="-DNDEBUG" \
+          -DCMAKE_CXX_FLAGS_RELEASE:STRING="-DNDEBUG" \
+          -DCMAKE_Fortran_FLAGS_RELEASE:STRING="-DNDEBUG" \
+          -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
+          -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+          -DINCLUDE_INSTALL_DIR:PATH=/usr/include \
+          -DLIB_INSTALL_DIR:PATH=/usr/lib64 \
+          -DSYSCONF_INSTALL_DIR:PATH=/etc \
+          -DSHARE_INSTALL_PREFIX:PATH=/usr/share \
+          -DLIB_SUFFIX=64 \
+          -DBUILD_SHARED_LIBS:BOOL=ON ../src -DIMAGE_SUPPORT=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+To build Debian Ubuntu package you can go to https://salsa.debian.org/rocm-team/rocr-runtime
+To build Redhat or CentOS package you can go to https://download.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/source/tree/Packages/r/rocm-runtime-3.9.0-0.fc34.src.rpm
+
 Installation instructions can be found in the ROCm manifest repository README.md:
 
 https://github.com/RadeonOpenCompute/ROCm
@@ -66,3 +87,4 @@ The information contained herein is for informational purposes only, and is subj
 AMD, the AMD Arrow logo, and combinations thereof are trademarks of Advanced Micro Devices, Inc. Other product names used in this publication are for identification purposes only and may be trademarks of their respective companies.
 
 Copyright (c) 2014-2017 Advanced Micro Devices, Inc. All rights reserved.
+
